@@ -24,7 +24,7 @@
 
 # Archipelago stuff
 echo "Setting Archipelago setting in gradle build"
-APP_HOME="`maui path [GradleBuildSystem]pkg.dir}`"
+APP_HOME="`maui path [GradleBuildSystem]pkg.dir`"
 echo "Using gradle from $APP_HOME"
 
 if [ -z "$APP_HOME" ] 
