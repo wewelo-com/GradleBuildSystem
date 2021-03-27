@@ -21,13 +21,23 @@
 @rem
 @rem ##########################################################################
 
+
+@rem Archipelago stuff
+echo Setting Archipelago setting in gradle build
+@rem set APP_HOME=$(maui path [GradleBuildSystem]pkg.dir)
+
+for /f "delims=" %%A in ('maui path [GradleBuildSystem]pkg.dir') do set "APP_HOME=%%A"
+echo Using gradle from %APP_HOME%
+
+@rem Archipelago stuff end
+
 @rem Set local scope for the variables with windows NT shell
 if "%OS%"=="Windows_NT" setlocal
 
 set DIRNAME=%~dp0
 if "%DIRNAME%" == "" set DIRNAME=.
 set APP_BASE_NAME=%~n0
-set APP_HOME=%DIRNAME%
+@REM set APP_HOME=%DIRNAME%
 
 @rem Resolve any "." and ".." in APP_HOME to make it shorter.
 for %%i in ("%APP_HOME%") do set APP_HOME=%%~fi
