@@ -33,16 +33,31 @@ then
     exit 1
 fi
 
-JDK_DIRS="`maui path build.jdk`"
-# Can we do better then this?
-JDK_HOME=${JDK_DIRS##*;}
+unameOut="$(uname -s)"
+case "${unameOut}" in
+    Linux*)     machine=Linux;;
+    Darwin*)    machine=Mac;;
+    CYGWIN*)    machine=Cygwin;;
+    MINGW*)     machine=MinGw;;
+    *)          machine="UNKNOWN:${unameOut}"
+esac
+echo "Identified machine as ${machine}"
 
-if [ ! -z "$JDK_HOME" ] 
-then
-    echo "Using $JDK_HOME as JAVA_HOME"
-    JAVA_HOME=$JDK_HOME
-else
-    echo "Was unable to find JDK package, will use local JAVA_HOME if preset"
+if [ "${machine}" = Linux ]; then
+    echo "On Linux trying to use the provide package JDK"
+    JDK_DIRS="`maui path build.jdk`"
+    # Can we do better then this?
+    JDK_HOME=${JDK_DIRS##*;}
+
+    if [ ! -z "$JDK_HOME" ] 
+    then
+        echo "Using $JDK_HOME as JAVA_HOME"
+        JAVA_HOME=$JDK_HOME
+    else
+        echo "Was unable to find JDK package, will use local JAVA_HOME if preset"
+    fi
+else 
+    echo "Not on linux will use local JDK"
 fi
 # Archipelago stuff end
 
