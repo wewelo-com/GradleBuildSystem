@@ -7,5 +7,11 @@ echo "Using gradle at $GRADLE_PATH"
 
 # Collect all arguments for the java command, following the shell quoting and substitution rules
 
-echo "Executing $GRADLE_PATH/archipelagoGradleW build"
-exec "$GRADLE_PATH/archipelagoGradleW" "build"
+if [ $# -eq 0 ]
+  then
+  echo "Executing $GRADLE_PATH/archipelagoGradleW build"
+  exec "$GRADLE_PATH/archipelagoGradleW" "build"
+else
+  echo "Executing $GRADLE_PATH/archipelagoGradleW $@"
+  exec "$GRADLE_PATH/archipelagoGradleW" $@
+fi
